@@ -31,7 +31,7 @@ class MentionsController < ApplicationController
               .where('issues.project_id = ?', @project_id)
     end
 
-    @projects = user_mention_projects(user)
+    @projects = user_mention_projects(user, @from, @to)
 
     @limit = per_page_option
     @journal_count = scope.count
@@ -58,14 +58,15 @@ class MentionsController < ApplicationController
     nil
   end
 
-  # Projects the user can see in their mentions, used for the filter dropdown.
-  # Not date-bounded so the list stays stable regardless of the active window.
-  def user_mention_projects(user)
-    project_ids = Journal.mentioning(user)
-                         .unscope(:includes)
-                         .joins('INNER JOIN issues ON issues.id = journals.journalized_id')
-                         .distinct
-                         .pluck('issues.project_id')
-    Project.where(id: project_ids).sorted
+  # Projects present in the user's mentions within the active date window.
+  # Bounded by from/to so first-open does NOT scan the entire journals table
+  # (the @login LIKE pre-filter is the expensive part on large databases).
+  def user_mention_projects(user, from, to)
+    rel = Journal.mentioning(user)
+                 .unscope(:includes)
+                 .joins('INNER JOIN issues ON issues.id = journals.journalized_id')
+    rel = rel.where('journals.created_on >= ?', from.beginning_of_day) if from
+    rel = rel.where('journals.created_on <= ?', to.end_of_day)        if to
+    Project.where(id: rel.distinct.pluck('issues.project_id')).sorted
   end
 end
