@@ -8,7 +8,7 @@
 
 [![Readme in English](https://img.shields.io/badge/Readme-English-blue)](https://github.com/monobilisim/redmine-issue-tag/blob/master/README.md)
 
-[![](https://r2.mono.tr/logo/Mono-Logo.svg)](https://mono.net.tr/)
+[![](https://r2.mono.tr/logo/Mono-Logo.svg)](https://mono.tr/)
 
 </div>
 
