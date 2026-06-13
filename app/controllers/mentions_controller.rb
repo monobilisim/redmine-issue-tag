@@ -26,6 +26,7 @@ class MentionsController < ApplicationController
     scope = scope.where('journals.created_on <= ?', @to.end_of_day)        if @to
     if @project_id
       scope = scope
+              .unscope(:includes)
               .joins('INNER JOIN issues ON issues.id = journals.journalized_id')
               .where('issues.project_id = ?', @project_id)
     end
@@ -61,6 +62,7 @@ class MentionsController < ApplicationController
   # Not date-bounded so the list stays stable regardless of the active window.
   def user_mention_projects(user)
     project_ids = Journal.mentioning(user)
+                         .unscope(:includes)
                          .joins('INNER JOIN issues ON issues.id = journals.journalized_id')
                          .distinct
                          .pluck('issues.project_id')
