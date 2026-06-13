@@ -6,7 +6,7 @@
 [![Issues](https://img.shields.io/github/issues/monobilisim/redmine-issue-tag.svg?style=for-the-badge)](https://github.com/monobilisim/redmine-issue-tag/issues)
 [![GPL License](https://img.shields.io/github/license/monobilisim/redmine-issue-tag.svg?style=for-the-badge)](https://github.com/monobilisim/redmine-issue-tag/blob/master/LICENSE)
 
-[![Readme in English](https://img.shields.io/badge/Readme-English-blue)](https://github.com/monobilisim/redmine-issue-tag/blob/master/README.md)
+[![Readme in English](https://img.shields.io/badge/Readme-English-blue)](https://github.com/monobilisim/redmine-issue-tag/blob/main/README.md)
 
 [![](https://r2.mono.tr/logo/Mono-Logo.svg)](https://mono.tr/)
 
@@ -96,4 +96,4 @@ By default the page shows mentions from yesterday and today. Use the filter form
 
 ## License
 
-redmine-issue-tag is licensed under GPL-3.0. See [LICENSE](https://github.com/monobilisim/redmine-issue-tag/blob/master/LICENSE) file for details.
+redmine-issue-tag is licensed under GPL-3.0. See [LICENSE](https://github.com/monobilisim/redmine-issue-tag/blob/main/LICENSE) file for details.
