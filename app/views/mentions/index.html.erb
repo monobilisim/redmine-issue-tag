@@ -1,0 +1,83 @@
+<div class="contextual"></div>
+
+<h2><%= l(:label_issue_tag_mentions) %></h2>
+
+<%= form_tag({ controller: 'mentions', action: 'index' }, method: :get, id: 'mentions-filter-form') do %>
+  <input type="hidden" name="set_filter" value="1" />
+  <fieldset class="collapsible">
+    <legend><%= l(:label_filter_plural) %></legend>
+    <div style="display:flex; gap:1.5em; flex-wrap:wrap; align-items:flex-end;">
+      <span>
+        <label><%= l(:label_date_from) %></label><br/>
+        <%= date_field_tag 'from', params[:from] || (@from && @from.iso8601), size: 12 %>
+      </span>
+      <span>
+        <label><%= l(:label_date_to) %></label><br/>
+        <%= date_field_tag 'to', params[:to] || (@to && @to.iso8601), size: 12 %>
+      </span>
+      <span>
+        <label><%= l(:field_project) %></label><br/>
+        <%= select_tag 'project_id',
+              options_for_select(
+                [[l(:label_all), '']] +
+                @projects.map { |p| [p.name, p.id.to_s] },
+                @project_id) %>
+      </span>
+      <span>
+        <%= submit_tag l(:button_apply), class: 'button-positive', name: nil %>
+        <%= link_to l(:button_clear),
+                    { controller: 'mentions', action: 'index', set_filter: '1' },
+                    class: 'icon icon-reload' %>
+      </span>
+    </div>
+  </fieldset>
+<% end %>
+
+<% if @journals.empty? %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% else %>
+  <table class="list issues">
+    <thead>
+      <tr>
+        <th><%= l(:field_issue) %></th>
+        <th><%= l(:field_project) %></th>
+        <th><%= l(:field_author) %></th>
+        <th><%= l(:field_created_on) %></th>
+        <th><%= l(:field_notes) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @journals.each do |journal| %>
+        <% issue = journal.journalized %>
+        <% next unless issue.is_a?(Issue) %>
+        <tr class="<%= cycle('odd', 'even') %>">
+          <td class="subject">
+            <%= link_to "##{issue.id}",
+                        issue_path(issue, anchor: "change-#{journal.id}") %>
+            <%= link_to issue.subject.truncate(80),
+                        issue_path(issue, anchor: "change-#{journal.id}") %>
+          </td>
+          <td class="project">
+            <%= link_to_project(issue.project) if issue.project %>
+          </td>
+          <td class="author">
+            <%= journal.user ? link_to_user(journal.user) : l(:label_unknown_user) %>
+          </td>
+          <td class="created_on">
+            <%= link_to format_time(journal.created_on),
+                        issue_path(issue, anchor: "change-#{journal.id}") %>
+          </td>
+          <td class="notes">
+            <div class="wiki">
+              <%= textilizable(journal, :notes) %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <span class="pagination"><%= pagination_links_full @paginator %></span>
+<% end %>
+
+<% html_title(l(:label_issue_tag_mentions)) %>
