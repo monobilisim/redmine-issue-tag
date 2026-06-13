@@ -4,7 +4,7 @@
 [![Forks](https://img.shields.io/github/forks/monobilisim/redmine-issue-tag.svg?style=for-the-badge)](https://github.com/monobilisim/redmine-issue-tag/network/members)
 [![Stargazers](https://img.shields.io/github/stars/monobilisim/redmine-issue-tag.svg?style=for-the-badge)](https://github.com/monobilisim/redmine-issue-tag/stargazers)
 [![Issues](https://img.shields.io/github/issues/monobilisim/redmine-issue-tag.svg?style=for-the-badge)](https://github.com/monobilisim/redmine-issue-tag/issues)
-[![GPL License](https://img.shields.io/github/license/monobilisim/redmine-issue-tag.svg?style=for-the-badge)](https://github.com/monobilisim/redmine-issue-tag/blob/master/LICENSE)
+[![GPL License](https://img.shields.io/github/license/monobilisim/redmine-issue-tag.svg?style=for-the-badge)](https://github.com/monobilisim/redmine-issue-tag/blob/main/LICENSE)
 
 [![Readme in English](https://img.shields.io/badge/Readme-English-blue)](https://github.com/monobilisim/redmine-issue-tag/blob/main/README.md)
 
